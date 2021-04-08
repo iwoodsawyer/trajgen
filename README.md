@@ -6,3 +6,5 @@ Usage instructions:
 3. Compile the Simulink S-functions using the script make_trajgen.m.
 4. Open and run the Simulink model trajgen_pos.slx (position-based) or trajgen_vel.slx (velocity-based).
 5. If Simulink/Embedded Coder is available, generate/build C++ code in Simulink by Code->C/C++ Code->Build Model. (Note that C code generation is not supported) 
+
+[![View Trajectory Generator using the Reflexxes Motion Library on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/50358-trajectory-generator-using-the-reflexxes-motion-library)
