@@ -369,7 +369,7 @@ static void mdlRTW(SimStruct *S)
             SSWRITE_VALUE_NUM,"SampleTime",mxGetScalar(SAMPLE_TIME_PARAM(S)),
             SSWRITE_VALUE_NUM,"NumberOfDoFs",mxGetScalar(NUMBER_OF_DOFS_PARAM(S)),
             SSWRITE_VALUE_STR,"SyncBehavior",mxArrayToString(SYNC_BEHAVIOR_PARAM(S)),
-            SSWRITE_VALUE_STR,"AfterFinalStateBehavior",mxArrayToString(SYNC_BEHAVIOR_PARAM(S)) ))
+            SSWRITE_VALUE_STR,"AfterFinalStateBehavior",mxArrayToString(AFTER_FINAL_STATE_BEHAVIOR_PARAM(S)) ))
     {
         return;
     }

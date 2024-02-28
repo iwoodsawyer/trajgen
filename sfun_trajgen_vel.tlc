@@ -64,7 +64,7 @@
     %% start and every time an enabled subsystem is re-enabled.
 
     %% Reset the IWork flag to 1 when values need to be reinitialized.
-    %<LibBlockPWork(BlockInit, "", "", 0)> = 1;
+    %<LibBlockIWork(BlockInit, "", "", 0)> = 1;
   }
 %endfunction
 
@@ -83,7 +83,7 @@
     RMLVelocityOutputParameters *OP    = new RMLVelocityOutputParameters( ndofs );
     RMLVelocityFlags            *FLAGS = new RMLVelocityFlags();
     
-    FLAGS->SynchronizationBehavior = RMLPositionFlags::%<SFcnParamSettings.SyncBehavior>;
+    FLAGS->SynchronizationBehavior = RMLFlags::%<SFcnParamSettings.SyncBehavior>;
     
     %% Store new C++ object in the pointers vector
     %<LibBlockPWork(ReflexxesAPI, "", "", 0)> = RML;
@@ -101,7 +101,7 @@
   /* %<Type> Block: %<Name> */
   {
     %% Initialize values if the IWork vector flag is true. 
-    if (%<LibBlockPWork(BlockInit, "", "", 0)> == 1) {
+    if (%<LibBlockIWork(BlockInit, "", "", 0)> == 1) {
         const int_T ndofs = static_cast<int_T>(%<SFcnParamSettings.NumberOfDoFs>);
         for (int_T dof=0; dof < ndofs; dof++)
         {
@@ -110,7 +110,7 @@
             (%<LibBlockOutputSignalAddr(2, "", "", 0)>)[dof] = (%<LibBlockInputSignalAddr(3, "", "", 0)>)[dof];
         }
 
-        %<LibBlockPWork(BlockInit, "", "", 0)> = 0;
+        %<LibBlockIWork(BlockInit, "", "", 0)> = 0;
     }
     else {
         %% Retrieve C++ object from the pointers vector
@@ -147,13 +147,13 @@
     const int_T ndofs = static_cast<int_T>(%<SFcnParamSettings.NumberOfDoFs>);
     for (int_T dof=0; dof < ndofs; dof++)
     {
-        IP->CurrentPositionVector               = (%<LibBlockInputSignalAddr(1, "", "", 0)>)[dof];
-        IP->CurrentVelocityVector               = (%<LibBlockInputSignalAddr(2, "", "", 0)>)[dof];
-        IP->CurrentAccelerationVector           = (%<LibBlockInputSignalAddr(3, "", "", 0)>)[dof];
-        IP->MaxAccelerationVector->VecData[dof] = (%<LibBlockParameterAddr(AccLimit, "", "", 0)>)[dof];
-        IP->MaxJerkVector->VecData[dof]         = (%<LibBlockParameterAddr(JrkLimit, "", "", 0)>)[dof];
-        IP->TargetVelocityVector->VecData[dof]  = (%<LibBlockInputSignalAddr(0, "", "", 0)>)[dof];
-        IP->SelectionVector->VecData[dof]       = true;
+        IP->CurrentPositionVector->VecData[dof]     = (%<LibBlockInputSignalAddr(1, "", "", 0)>)[dof];
+        IP->CurrentVelocityVector->VecData[dof]     = (%<LibBlockInputSignalAddr(2, "", "", 0)>)[dof];
+        IP->CurrentAccelerationVector->VecData[dof] = (%<LibBlockInputSignalAddr(3, "", "", 0)>)[dof];
+        IP->MaxAccelerationVector->VecData[dof]     = (%<LibBlockParameterAddr(AccLimit, "", "", 0)>)[dof];
+        IP->MaxJerkVector->VecData[dof]             = (%<LibBlockParameterAddr(JrkLimit, "", "", 0)>)[dof];
+        IP->TargetVelocityVector->VecData[dof]      = (%<LibBlockInputSignalAddr(0, "", "", 0)>)[dof];
+        IP->SelectionVector->VecData[dof]           = true;
     }
     
     %% Calling the Reflexxes OTG algorithm
